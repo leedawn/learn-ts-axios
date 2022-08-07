@@ -20,6 +20,8 @@ export function processHeaders(headers: any, data: any): any {
   }
   return headers
 }
+
+// 将字符串转化成对象
 export function parseHeaders(headers: string): any {
   let parsed = Object.create(null)
   if (!headers) {

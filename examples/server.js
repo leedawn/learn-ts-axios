@@ -37,6 +37,38 @@ router.post('/base/buffer', function(req, res) {
     res.json(buf.toJSON())
   })
 })
+router.get('/error/get', function(req, res) {
+  if (Math.random() > 0.5) {
+    res.json({
+      msg: 'hello world'
+    })
+  } else {
+    res.status(500)
+    res.end()
+  }
+})
+router.get('/error/timeout', function(req, res) {
+  setTimeout(() => {
+    res.json({
+      msg: 'hello world'
+    })
+  }, 3000)
+})
+
+const methods1 = ['get', 'options', 'delete', 'head']
+methods1.forEach(method => {
+  router[method]('/extend/' + method, function(req, res) {
+    res.json(req.query)
+  })
+})
+
+const methods2 = ['post', 'put', 'patch']
+methods2.forEach(method => {
+  router[method]('/extend/' + method, function(req, res) {
+    // express 没有内置处理 post 请求体的功能，需要通过 bodyParser 进行处理
+    res.json(req.body)
+  })
+})
 
 app.use(router)
 

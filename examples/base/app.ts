@@ -104,7 +104,7 @@ axios({
 })
 
 const paramsString = 'q=URLUtils.searchParams&topic=api'
-const searchParams = new URLSearchParams(paramsString)
+const searchParams = new URLSearchParams(paramsString) // 处理 URL 的查询字符串
 
 axios({
   method: 'post',
